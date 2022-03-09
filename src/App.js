@@ -1,12 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { AddUser } from './components/Users/AddUser';
+import { UsersList } from './components/Users/UsersList';
 
-function App() {
+const App = () => {
+  const [users, setUsers] = useState([]);
+
+  const addUserHandler = (uName, uAge) => {
+    setUsers((prevUsers) => {
+      return [...prevUsers, {name: uName, age: uAge, id: Math.random().toString()}];
+    })
+  }
+
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={users} />
     </div>
-  );
+  )
 }
 
 export default App;
